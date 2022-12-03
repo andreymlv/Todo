@@ -3,11 +3,12 @@ package ru.ndrmlv.todo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -33,47 +34,27 @@ fun MyApp() {
     Surface(
         modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background
     ) {
-        Column {
-            Column(
-                modifier = Modifier
-                    .verticalScroll(rememberScrollState())
-                    .weight(1f)
-            ) {
-                Task(false, "test")
-                Task(false, "test")
-                Task(false, "test")
-                Task(false, "test")
-                Task(false, "test")
-                Task(true, "test")
-                Task(false, "test")
-                Task(false, "test")
-                Task(true, "test")
-                Task(false, "test")
-                Task(false, "test")
-                Task(false, "test")
-                Task(true, "test")
-                Task(false, "test")
-                Task(false, "test")
-                Task(true, "test")
-                Task(false, "test")
-                Task(false, "test")
-                Task(true, "test")
-                Task(false, "test")
-                Task(false, "test")
-                Task(true, "test")
-                Task(false, "test")
-                Task(false, "test")
-            }
-            Box(
-                modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.BottomCenter
-            ) {
-                Button(
-                    onClick = { /*TODO*/ }, shape = CircleShape, modifier = Modifier.size(48.dp)
-                ) {
-                    Text(text = "+")
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text("todo") },
+                )
+            },
+            floatingActionButtonPosition = FabPosition.Center,
+            floatingActionButton = {
+                FloatingActionButton(onClick = {/* TODO */}) {
+                    Text("+")
                 }
-            }
-        }
+            },
+            content = { paddingValues ->
+                LazyColumn(modifier = Modifier.padding(paddingValues)) {
+                    items(50) {
+                        Task(completed = false, content = "test $it")
+                        Task(completed = true, content = "test $it")
+                    }
+                }
+            },
+        )
     }
 }
 
