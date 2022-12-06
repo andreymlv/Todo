@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.sp
 import java.util.*
 
 class Task(
-    public val completed: MutableState<Boolean>,
+    var completed: MutableState<Boolean>,
     private val task: String,
     private val desc: String?,
     private val alarmedAt: Date?,
